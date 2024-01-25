@@ -1,0 +1,108 @@
+{
+    "pluginAlias": "Homebridge Growatt",
+    "pluginType": "platform",
+    "singular": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "required": true,
+          "default": "Growatt"
+        },
+        "model": {
+          "title": "Inverter Model",
+          "type": "string",
+          "required": true,
+          "default": "Inverter",
+          "description": "Model of the inverter"
+        },
+        "serial": {
+          "title": "Inverter Serial Number",
+          "type": "string",
+          "required": true,
+          "default": "Inverter-Serial",
+          "description": "Serial number of the inverter"
+        },
+        "maxPvCapacity": {
+          "title": "Max PV Capacity",
+          "type": "integer",
+          "required": true,
+          "placeholder": 5000,
+          "minimum": 1000,
+          "description": "Maximum generation of your PV in watts."
+        },
+        "dataMode": {
+          "title": "Data Mode",
+          "type": "string",
+          "default": "mqtt",
+          "oneOf": [
+            { "title": "MQTT", "enum": ["mqtt"] },
+            { "title": "InfluxDB2", "enum": ["influxdb"] }
+          ],
+          "required": true,
+          "description": "Use MQTT if you want real time data and InfluxDB2 if you want polling."
+        },
+        "mqtt": {
+          "title": "MQTT",
+          "type": "object",
+          "properties": {
+            "url": {
+              "title": "MQTT URL",
+              "type": "string",
+              "description": "URL of MQTT broker",
+              "default": "mqtt://localhost",
+              "format": "uri"
+            },
+            "topic": {
+              "title": "MQTT Topic",
+              "type": "string",
+              "description": "Topic to subscribe to",
+              "default": "growatt"
+            }
+          }
+        },
+        "influxdb": {
+          "title": "InfluxDB2",
+          "type": "object",
+          "properties": {
+            "url": {
+              "title": "Influx URL",
+              "type": "string",
+              "description": "URL of Influx",
+              "default": "http://localhost:8086",
+              "format": "uri"
+            },
+            "apiKey": {
+              "title": "Influx API Key",
+              "type": "string",
+              "description": "Your Influx API Key. Make sure bucket read is allowed."
+            },
+            "org": {
+              "title": "Influx Organization",
+              "type": "string",
+              "description": "Your Influx organization"
+            },
+            "bucket": {
+              "title": "Influx Bucket",
+              "type": "string",
+              "description": "Your Influx bucket"
+            },
+            "measurement": {
+              "title": "Influx Measurement",
+              "type": "string",
+              "description": "The name of the measurement for the data collector"
+            },
+            "pollInterval": {
+              "title": "Poll Interval",
+              "type": "integer",
+              "placeholder": 5,
+              "minimum": 1,
+              "description": "Number of seconds for the plugin to query data."
+            }
+          }
+        }
+      }
+    }
+  }
