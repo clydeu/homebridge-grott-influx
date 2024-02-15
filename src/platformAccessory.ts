@@ -66,9 +66,16 @@ export class GrowattPV {
 
   updateValue(value: number) {
     const pvValue = value/10;
-    this.brightnessValue = Math.min((pvValue / this.maxPvCapacity) * 100, 100);
-    this.onValue = pvValue > 0.0;
-    this.luxValue = pvValue;
+    if (pvValue > 10){
+      this.brightnessValue = Math.min((pvValue / this.maxPvCapacity) * 100, 100);
+      this.onValue = true;
+      this.luxValue = pvValue;
+    } else{
+      this.brightnessValue = LIGHT_BULB_MIN_BRIGHTNESS;
+      this.onValue = false;
+      this.luxValue = LIGHT_SENSOR_MIN_VALUE;
+    }
+    
 
     this.lightbulbService
       .getCharacteristic(this.platform.Characteristic.On)
