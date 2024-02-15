@@ -1,7 +1,7 @@
 {
   "displayName": "Homebridge Growatt",
   "name": "homebridge-growatt",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Homebridge plugin for Growatt",
   "main": "dist/index.js",
   "repository": {

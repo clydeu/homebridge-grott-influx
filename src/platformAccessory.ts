@@ -66,8 +66,9 @@ export class GrowattPV {
 
   updateValue(value: number) {
     const pvValue = value/10;
-    if (pvValue > 10){
-      this.brightnessValue = Math.min((pvValue / this.maxPvCapacity) * 100, 100);
+    const brightness = Math.min((pvValue / this.maxPvCapacity) * 100, 100);
+    if (brightness >= 1.0){
+      this.brightnessValue = brightness;
       this.onValue = true;
       this.luxValue = pvValue;
     } else{
